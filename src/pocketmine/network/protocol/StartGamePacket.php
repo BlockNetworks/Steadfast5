@@ -206,7 +206,11 @@ class StartGamePacket extends PEPacket {
 		if ($playerProtocol >= Info::PROTOCOL_400) {
 			$this->putByte(0); // nether type
 		}
-		
+
+		if ($playerProtocol >= Info::PROTOCOL_407) {
+			$this->putByte(0); // exp gameplay
+		}
+
 		// level settings end
 		$this->putString('3138ee93-4a4a-479b-8dca-65ca5399e075'); // level id (random UUID)
 		$this->putString(''); // level name
