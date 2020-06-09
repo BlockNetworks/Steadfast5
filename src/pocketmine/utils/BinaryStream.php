@@ -472,7 +472,7 @@ class BinaryStream {
 			$uniqId = $skinId . $skinGeomtryName . "-" . microtime(true);
 			$this->putString($uniqId); // Full Skin ID	
 		}
-		if ($playerProtocol >= Info::PROTOCOL_390) {
+		if ($playerProtocol == Info::PROTOCOL_390 || $playerProtocol >= Info::PROTOCOL_406) {
 			$this->putString($additionalSkinData['ArmSize']??''); //ArmSize
 			$this->putString($additionalSkinData['SkinColor']??''); //SkinColor			
 			$this->putLInt(isset($additionalSkinData['PersonaPieces'])?count($additionalSkinData['PersonaPieces']):0);   //Persona Pieces -> more info to come
@@ -532,7 +532,7 @@ class BinaryStream {
 		
 		$additionalSkinData['CapeId'] = $this->getString();
 		$additionalSkinData['FullSkinId'] = $this->getString(); // Full Skin ID
-		if ($playerProtocol >= Info::PROTOCOL_390) {
+		if ($playerProtocol == Info::PROTOCOL_390 || $playerProtocol >= Info::PROTOCOL_406) {
 
 			$additionalSkinData['ArmSize'] = $this->getString();
 			$additionalSkinData['SkinColor'] = $this->getString();
