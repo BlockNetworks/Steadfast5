@@ -130,7 +130,7 @@ class StartGamePacket extends PEPacket {
 		$this->putByte(1); // Broadcast to LAN?
 		if ($playerProtocol >= Info::PROTOCOL_330) {
 			$this->putSignedVarInt(self::BROADCAST_SETTINGS_FRIENDS_OF_FRIENDS); // XBox Live Broadcast setting
-			$this->putSignedVarInt(self::BROADCAST_SETTINGS_FRIENDS_OF_FRIENDS); // Platform Broadcast setting
+//			$this->putSignedVarInt(self::BROADCAST_SETTINGS_FRIENDS_OF_FRIENDS); // Platform Broadcast setting
 		} else {
 			$this->putByte(1); // Broadcast to XBL?
 		}
