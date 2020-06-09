@@ -1119,7 +1119,12 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 //			'SET_ENTITY_DATA_PACKET',
 //			'UPDATE_ATTRIBUTES_PACKET',
 //			'ADVENTURE_SETTINGS_PACKET',
-//			'SET_TIME_PACKET'
+//			'SET_TIME_PACKET',
+//			'ADVENTURE_SETTINGS_PACKET',
+//			'INVENTORY_CONTENT_PACKET',
+//			'INVENTORY_SLOT_PACKET',
+//			'PLAY_STATUS_PACKET',
+//			'NETWORK_CHUNK_PUBLISHER_UPDATE_PACKET'
 		];
 		if (in_array($packet->pname(), $a)) {
 			return;

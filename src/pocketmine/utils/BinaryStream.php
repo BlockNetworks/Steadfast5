@@ -472,7 +472,7 @@ class BinaryStream {
 			$uniqId = $skinId . $skinGeomtryName . "-" . microtime(true);
 			$this->putString($uniqId); // Full Skin ID	
 		}
-		if ($playerProtocol == Info::PROTOCOL_390) {		
+		if ($playerProtocol >= Info::PROTOCOL_390) {
 			$this->putString($additionalSkinData['ArmSize']??''); //ArmSize
 			$this->putString($additionalSkinData['SkinColor']??''); //SkinColor			
 			$this->putLInt(isset($additionalSkinData['PersonaPieces'])?count($additionalSkinData['PersonaPieces']):0);   //Persona Pieces -> more info to come
@@ -531,8 +531,8 @@ class BinaryStream {
 		$additionalSkinData['CapeOnClassicSkin'] = $this->getByte();
 		
 		$additionalSkinData['CapeId'] = $this->getString();
-		$additionalSkinData['FullSkinId'] = $this->getString(); // Full Skin ID	
-		if ($playerProtocol == Info::PROTOCOL_390) {
+		$additionalSkinData['FullSkinId'] = $this->getString(); // Full Skin ID
+		if ($playerProtocol >= Info::PROTOCOL_390) {
 
 			$additionalSkinData['ArmSize'] = $this->getString();
 			$additionalSkinData['SkinColor'] = $this->getString();
@@ -550,6 +550,7 @@ class BinaryStream {
 			$additionalSkinData['PersonaPieces'] = $personaPieces;
 			$pieceTintColorCount = $this->getLInt();
 			$pieceTintColors = [];
+			var_dump('$pieceTintColorCount: ' . $pieceTintColorCount);
 			for($i = 0; $i < $pieceTintColorCount; ++$i){
 				$pieceType = $this->getString();
 				$colorCount = $this->getLInt();
