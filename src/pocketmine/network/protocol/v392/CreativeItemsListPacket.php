@@ -2,6 +2,7 @@
 
 namespace pocketmine\network\protocol\v392;
 
+use pocketmine\network\protocol\Info;
 use pocketmine\network\protocol\PEPacket;
 use pocketmine\network\protocol\Info331;
 
@@ -21,11 +22,15 @@ class CreativeItemsListPacket extends PEPacket {
 	public function encode($playerProtocol) {
 		$this->reset($playerProtocol);
 		$this->putVarInt(count($this->groups));
-		foreach ($this->groups as $groupData) {
-			$this->putString($groupData['name']);
-			$this->putLInt($groupData['item']);
-			$this->putVarInt(0); // nbt count
+		//temporarily removed Group info. See doc and changelog
+		if ($playerProtocol <= Info::PROTOCOL_406) {
+			foreach ($this->groups as $groupData) {
+				$this->putString($groupData['name']);
+				$this->putLInt($groupData['item']);
+				$this->putVarInt(0); // nbt count
+			}
 		}
+
 		$this->putVarInt(count($this->items));
 		$index = 1;
 		foreach ($this->items as $itemData) {

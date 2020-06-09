@@ -30,7 +30,7 @@ class InventoryContentPacket extends PEPacket {
 					$this->putSignedVarInt(0);
 				} else {
 					if ($playerProtocol >= Info::PROTOCOL_406) {
-						$this->putSignedVarInt(0);
+						$this->putSignedVarInt(1);
 					} else {
 						$this->putSignedVarInt($index++);
 					}
