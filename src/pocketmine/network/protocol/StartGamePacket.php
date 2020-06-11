@@ -78,9 +78,8 @@ class StartGamePacket extends PEPacket {
 			$this->putString('');
 		}
 		if ($playerProtocol >= Info::PROTOCOL_406) {
-			$this->putShort(0); //SpawnSettingsType
-			//$this->putByte(0);
-			$this->putString(''); //User Difined Biome type
+			$this->putShort(0); // SpawnSettingsType
+			$this->putString(''); // User Difined Biome type
 		}
 
 		$this->putSignedVarInt($this->dimension);
@@ -130,7 +129,9 @@ class StartGamePacket extends PEPacket {
 		$this->putByte(1); // Broadcast to LAN?
 		if ($playerProtocol >= Info::PROTOCOL_330) {
 			$this->putSignedVarInt(self::BROADCAST_SETTINGS_FRIENDS_OF_FRIENDS); // XBox Live Broadcast setting
-//			$this->putSignedVarInt(self::BROADCAST_SETTINGS_FRIENDS_OF_FRIENDS); // Platform Broadcast setting
+			if ($playerProtocol < Info::PROTOCOL_406) {
+				$this->putSignedVarInt(self::BROADCAST_SETTINGS_FRIENDS_OF_FRIENDS); // Platform Broadcast setting
+			}
 		} else {
 			$this->putByte(1); // Broadcast to XBL?
 		}

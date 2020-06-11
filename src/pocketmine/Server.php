@@ -2417,12 +2417,7 @@ class Server{
 			$pk->encode($p->getPlayerProtocol(), $p->getSubClientId());
 			$bpk = new BatchPacket();
 			$buffer = $pk->getBuffer();
-			var_dump("PROTOCOL: " . $p->getPlayerProtocol());
-			if ($p->getPlayerProtocol() >= Info::PROTOCOL_406) {
-				$bpk->payload = zlib_encode(Binary::writeVarInt(strlen($buffer)) . $buffer, ZLIB_ENCODING_RAW, 7);
-			} else {
-				$bpk->payload = zlib_encode(Binary::writeVarInt(strlen($buffer)) . $buffer, ZLIB_ENCODING_DEFLATE, 7);
-			}
+			$bpk->payload = zlib_encode(Binary::writeVarInt(strlen($buffer)) . $buffer, Player::getCompressAlg($p->getPlayerProtocol()), 7);
 			$bpk->encode($p->getPlayerProtocol());
 			$this->craftList[$p->getPlayerProtocol()] = $bpk->getBuffer();
 		}
