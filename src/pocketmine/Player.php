@@ -1244,13 +1244,6 @@ class Player extends Human implements CommandSender, InventoryHolder, IPlayer {
 		var_dump('to client');
 		$buffer = '';
 		foreach ($this->packetQueue as $pkBuf) {
-			//for debug
-//			var_dump(ord($pkBuf{0}));
-//			if (strlen($pkBuf) > 1000) {
-//				var_dump(strlen($pkBuf));
-//			} else {
-//				var_dump($pkBuf);
-//			}
 			$buffer .= Binary::writeVarInt(strlen($pkBuf)) . $pkBuf;
 		}
 		foreach ($this->inventoryPacketQueue as $pk) {
